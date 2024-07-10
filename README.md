@@ -121,7 +121,7 @@ project-root/
 ## Notes
 Ensure the backup files are placed in the appropriate directories as specified in `backups.env`.
 Adjust the number of worlds by setting the `NUM_WORLDS` variable when running make commands.
-Right now if you have `NUM_WORLDS=3` and have `docker-compose.yml` for that and wants to have more services lets say `NUM_WORLDS=6` you need to remove the old `docker-compose.yml` first and let the make target recreate it with the new value
+Right now if you have `NUM_WORLDS=3` and have `docker-compose.yml` for that and wants to have more services lets say `NUM_WORLDS=6` you need to remove the old `docker-compose.yml` first and let the make target recreate it with the new value.
 
 
 ## Troubleshooting
