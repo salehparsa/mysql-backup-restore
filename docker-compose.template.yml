@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+{% for i in range(1, num_worlds + 1) %}
+  mysql_world{{ i }}_before:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world{{ i }}_before
+    ports:
+      - "330{{ i }}:3306"
+    volumes:
+      - ./backups/world{{ i }}:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+  mysql_world{{ i }}_after:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world{{ i }}_after
+    ports:
+      - "330{{ i }}{{ i }}:3306"
+    volumes:
+      - ./backups/world{{ i }}:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+{% endfor %}

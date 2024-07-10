@@ -1,0 +1,108 @@
+version: '3.8'
+services:
+
+  mysql_world1_before:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world1_before
+    ports:
+      - "3301:3306"
+    volumes:
+      - ./backups/world1:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+  mysql_world1_after:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world1_after
+    ports:
+      - "33011:3306"
+    volumes:
+      - ./backups/world1:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+
+  mysql_world2_before:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world2_before
+    ports:
+      - "3302:3306"
+    volumes:
+      - ./backups/world2:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+  mysql_world2_after:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world2_after
+    ports:
+      - "33022:3306"
+    volumes:
+      - ./backups/world2:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+
+  mysql_world3_before:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world3_before
+    ports:
+      - "3303:3306"
+    volumes:
+      - ./backups/world3:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+  mysql_world3_after:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - secrets.env
+    container_name: mysql_world3_after
+    ports:
+      - "33033:3306"
+    volumes:
+      - ./backups/world3:/backups
+      - ./backups.env:/backups.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5      
+
