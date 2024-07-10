@@ -1,3 +1,4 @@
 secrets.env
 backups.env
 .DS_Store
+backups/*
