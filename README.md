@@ -17,6 +17,7 @@ Ensure you have the `jinja2` package installed in your Python environment:
 
 ```bash
 pip install jinja2
+```
 
 ### Prepare the Environment Files
 
@@ -25,7 +26,7 @@ Create a `secrets.env` file with your MySQL credentials:
 ```
 MYSQL_DATABASE=database
 MYSQL_PASSWORD=password
-
+```
 A sample of `secrets.env` available in the repository.
 
 Create a `backups.env` file specifying the backup files for each database and state:
@@ -37,7 +38,7 @@ world2_before_backup=backup2_before.sql.gz
 world2_after_backup=backup2_after.sql.gz
 world3_before_backup=backup3_before.sql.gz
 world3_after_backup=backup3_after.sql.gz
-
+```
 In our example, each world has a state before and after. Please note that the state before and after needs to be in lower case. In the `backups.env` which is available in the repository I used my backup name, but in general you can add yours and there is no limitation there since it's just an environmental variable
 
 ## Generate and Run Docker Compose
@@ -46,7 +47,7 @@ This project is using a template to generate a `docker-compose.yml` depends on t
 
 ```bash
 make NUM_WORLDS=3 up
-
+```
 Above going to create a `docker-compose.yml` with 6 MySQL databases for 3 different services and bring them up. The `docker-compose.yml` in the repository is also generated based on this make target.
 
 ## Restore Backups on all databases at once
@@ -55,13 +56,14 @@ This project contains a script `restore-backup.sh` that restore all the backups 
 
 ```bash
 make NUM_WORLDS=3 restore
-
+```
 ## Restore Backup on single database
 
 You are able to restore one backup with executing following:
 
 ```bash
 docker exec -i CONTAINER_NAME sh -c 'exec mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE'
+```
 
 Please replace the `CONTAINER_NAME` with the name of the container that you want to restore the backup on.
 
@@ -71,18 +73,20 @@ We do have a script in this repository `run-query.sh` which helps you to run the
 
 ```bash
 make NUM_WORLDS=3 query QUERY="SELECT 1"
+```
 
 ## Running query against one database
 
 In general you can easily execute a query against a single database. You can run following:
 ```bash
 docker exec -i mysql_world1_after mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "select * FROM game.player;"
+```
 
 ## Stop Services
 You can easily stop the containers via following targets:
 ```bash
 make NUM_WORLDS=3 make down
-
+```
 Please note, when you need 3 services you don't need to add `NUM_WORLDS=3` for make targets since it has the default values already
 
 ## Files and Directories
@@ -109,7 +113,7 @@ project-root/
 ├── Makefile
 ├── docker-compose.template.yml
 ├── README.md
-
+```
 ## Files overview
 `Makefile`: Defines the build and run automation tasks.
 `docker-compose.template.yml`: The Jinja2 template for generating `docker-compose.yml`.
