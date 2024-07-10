@@ -1,6 +1,3 @@
 secrets.env
 backups.env
-backups/world1/*
-backups/world2/*
-backups/world3/*
-.DS_Store/*
+.DS_Store
