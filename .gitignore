@@ -1,4 +1,6 @@
-.DS_Store
 secrets.env
 backups.env
-backups/*
+backups/world1/*
+backups/world2/*
+backups/world3/*
+.DS_Store/*
