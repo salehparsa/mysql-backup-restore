@@ -6,4 +6,4 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy initialization scripts
-COPY ./init /docker-entrypoint-initdb.d
+COPY ./scripts /docker-entrypoint-initdb.d
